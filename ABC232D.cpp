@@ -1,8 +1,5 @@
 #include <iostream>
-#include <math.h>
-#include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -39,12 +36,13 @@ int main() {
 
 	for (int i = 1; i < h; i++) {
 		for (int j = 1; j < w; j++) {
-			if (c[i][j] == '.') {
+			if (d[i - 1][j] == 0 && d[i][j - 1] == 0)d[i][j] = 0;
+			else if (c[i][j] == '.') {
 				d[i][j] = max(d[i - 1][j], d[i][j - 1]) + 1;
 				ans = max(ans, d[i][j]);
 			}
 		}
 	}
-	cout << ans;
+	cout << ans << "\n";
 	return 0;
 }
