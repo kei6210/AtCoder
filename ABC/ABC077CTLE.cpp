@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <queue>
 #include <algorithm>
 using namespace std;
 
@@ -16,17 +16,16 @@ int main() {
     sort(b.begin(), b.end());
     sort(c.begin(), c.end());
 
-    vector<long long>s(n + 1);
-    s[0] = 0;
-    for (int i = 1; i <= n; i++) {
-        int k_length = c.end() - upper_bound(c.begin(), c.end(), b[n - i]);
-        s[i] = s[i - 1] + k_length;
-    }
 
     long long ans = 0;
-    for (int i = 0; i < n; i++) {
-        int j_length = b.end() - upper_bound(b.begin(), b.end(), a[i]);
-        ans += s[j_length];
+    for (int i = n - 1; i >= 0; i--) {
+        cout << "i:" << i << " ";
+        for (int j = n - 1; j >= 0; j--) {
+            if (b[j] <= a[i])break;
+            int k_length = c.end() - upper_bound(c.begin(), c.end(), b[j]);
+            ans += k_length;
+        }
+        cout << ans << "\n";
     }
 
     cout << ans;
